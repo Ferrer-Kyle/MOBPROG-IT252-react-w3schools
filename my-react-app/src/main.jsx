@@ -1,38 +1,35 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-function MyForm() {
-  const [inputs, setInputs] = useState({});
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInputs(values => ({...values, [name]: value}))
-  }
+function Component1() {
+  const [user, setUser] = useState("Linus");
 
   return (
-    <form>
-      <label>First name:
-      <input 
-        type="text" 
-        name="firstname" 
-        value={inputs.firstname} 
-        onChange={handleChange}
-      />
-      </label>
-      <label>Last name:
-        <input 
-          type="text" 
-          name="lastname" 
-          value={inputs.lastname} 
-          onChange={handleChange}
-        />
-        </label>
-        <p>Current values: {inputs.firstname} {inputs.lastname}</p>
-    </form>
-  )
+    <>
+      <h1>{`Hello ${user}!`}</h1>
+      <Component2 user={user} />
+    </>
+  );
+}
+
+function Component2({ user }) {
+  return (
+    <>
+      <h1>Component 2</h1>
+      <Component3 user={user} />
+    </>
+  );
+}
+
+function Component3({ user }) {
+  return (
+    <>
+      <h1>Component 3</h1>
+      <h2>{`Hello ${user} again!`}</h2>
+    </>
+  );
 }
 
 createRoot(document.getElementById('root')).render(
-  <MyForm />
+  <Component1 />
 );
